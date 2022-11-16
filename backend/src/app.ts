@@ -1,21 +1,21 @@
 // ./index.ts
-import 'express-async-errors';
-import express from 'express';
+import 'express-async-errors'
+import express from 'express'
 
 class App {
-  public app: express.Express;
+  public app: express.Express
 
   constructor() {
-    this.app = express();
+    this.app = express()
 
-    this.config();
+    this.config()
   }
 
   private config():void {
 
-    this.app.use(express.json());
+    this.app.use(express.json())
 
-    this.routes();
+    this.routes()
   }
 
   private routes(): void {
@@ -23,8 +23,8 @@ class App {
   }
 
   public start(PORT: string | number):void {
-    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`))
   }
 }
 
-export { App };
+export { App }

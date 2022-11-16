@@ -1,4 +1,3 @@
-// ./statusCodes.ts
 const statusCodes = {
   OK: 200,
   NOT_FOUND: 404,
@@ -6,6 +5,6 @@ const statusCodes = {
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
   NO_CONTENT: 204,
-};
+}
 
-export default statusCodes;
+export default statusCodes

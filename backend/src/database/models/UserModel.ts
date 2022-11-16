@@ -1,12 +1,12 @@
-import { Model, INTEGER, STRING } from "sequelize";
-import db from '.';
-import Account from "./AccountModel";
+import { Model, INTEGER, STRING } from 'sequelize'
+import db from '.'
+import Account from './AccountModel'
 
 class User extends Model {
-  declare id: number;
-  declare username: string;
-  declare password: string;
-  declare accountId: number;
+  declare id: number
+  declare username: string
+  declare password: string
+  declare accountId: number
 }
 
 User.init(
@@ -40,9 +40,9 @@ User.init(
     sequelize: db,
     timestamps: false,
   }
-);
+)
 
-User.belongsTo(Account, { foreignKey: 'accountId', as: 'accountId'});
-Account.hasOne(User, { foreignKey: 'accountId', as: 'accountId'});
+User.belongsTo(Account, { foreignKey: 'accountId', as: 'accountId'})
+Account.hasOne(User, { foreignKey: 'accountId', as: 'accountId'})
 
-export default User;
+export default User

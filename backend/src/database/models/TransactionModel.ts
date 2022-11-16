@@ -1,13 +1,13 @@
-import { Model, INTEGER, DECIMAL, DATE } from "sequelize";
-import db from '.';
-import Account from "./AccountModel";
+import { Model, INTEGER, DECIMAL, DATE } from 'sequelize'
+import db from '.'
+import Account from './AccountModel'
 
 class Transaction extends Model {
-  declare id: number;
-  declare debitedAccountId: number;
-  declare creditedAccountId: number;
-  declare value: number;
-  declare createdAt: Date;
+  declare id: number
+  declare debitedAccountId: number
+  declare creditedAccountId: number
+  declare value: number
+  declare createdAt: Date
 }
 
 Transaction.init(
@@ -51,12 +51,12 @@ Transaction.init(
     sequelize: db,
     timestamps: false,
   }
-);
+)
 
-Transaction.belongsTo(Account, { foreignKey: 'debitedAccountId', as: 'debitedAccountId'});
-Transaction.belongsTo(Account, { foreignKey: 'creditedAccountId', as: 'creditedAccountId'});
+Transaction.belongsTo(Account, { foreignKey: 'debitedAccountId', as: 'debitedAccountId'})
+Transaction.belongsTo(Account, { foreignKey: 'creditedAccountId', as: 'creditedAccountId'})
 
-Account.hasMany(Transaction, { foreignKey: 'debitedAccountId', as: 'debitedAccountId'});
-Account.hasMany(Transaction, { foreignKey: 'creditedAccountId', as: 'creditedAccountId'});
+Account.hasMany(Transaction, { foreignKey: 'debitedAccountId', as: 'debitedAccountId'})
+Account.hasMany(Transaction, { foreignKey: 'creditedAccountId', as: 'creditedAccountId'})
 
-export default Transaction;
+export default Transaction

@@ -1,21 +1,23 @@
-import { Model, INTEGER, DECIMAL } from "sequelize";
-import db from '.';
+import { Model, INTEGER, DECIMAL } from 'sequelize'
+import db from '.'
 
 class Account extends Model {
-  declare id: number;
-  declare balance: number;
+  declare id: number
+  declare balance: number
 }
 
 Account.init(
   {
     id: {
-      type: INTEGER,
+
+
+        type: INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
     balance: {
-      allowNull: false,
+              allowNull: false,
       type: DECIMAL(10, 2),
     }, 
   }, {
@@ -23,6 +25,6 @@ Account.init(
     sequelize: db,
     timestamps: false,
   }
-);
+)
 
-export default Account;
+export default Account
