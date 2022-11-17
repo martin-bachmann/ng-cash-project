@@ -1,6 +1,7 @@
 // ./index.ts
 import 'express-async-errors'
 import express from 'express'
+import errorMiddleware from './middlewares/errorMiddleware'
 
 class App {
   public app: express.Express
@@ -19,7 +20,7 @@ class App {
   }
 
   private routes(): void {
-    // this.app.use(errorMiddleware);
+    this.app.use(errorMiddleware)
   }
 
   public start(PORT: string | number):void {

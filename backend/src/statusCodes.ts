@@ -1,10 +1,12 @@
 const statusCodes = {
-  OK: 200,
-  NOT_FOUND: 404,
-  CREATED: 201,
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  NO_CONTENT: 204,
+  ok: 200,
+  notFound: 404,
+  created: 201,
+  badRequest: 400,
+  unauthorized: 401,
+  noContent: 204,
+  unprocessableEntity: 422,
+  internalServerError: 500,
 }
 
 export default statusCodes
