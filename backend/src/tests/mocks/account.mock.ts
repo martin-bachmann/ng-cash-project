@@ -1,0 +1,1 @@
+export const account = { id: 1, balance: 100.00 }
