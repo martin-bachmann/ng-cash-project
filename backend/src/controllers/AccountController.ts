@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import statusCodes from '../statusCodes'
+import statusCodes from '../utils/statusCodes'
 import AccountService from '../services/AccountService'
 
 export default class AccountController {

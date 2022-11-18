@@ -7,7 +7,6 @@ import { Model } from 'sequelize'
 import database from '../database/models'
 import Account from '../database/models/AccountModel'
 import User from '../database/models/UserModel'
-import Transaction from '../database/models/TransactionModel'
 import { account } from './mocks/account.mock'
 import { user } from './mocks/login.mocks'
 import { accountWithoutBalance, creditedUser, transaction, transactionsList } from './mocks/transaction.mock'
@@ -172,7 +171,7 @@ describe('03 - Transaction routes', () => {
     })
   })
 
-  describe('GET /transaction - visualizar o balance atual', () => {
+  describe('GET /transaction - visualizar todas as transferências', () => {
     describe('quando o token não é informado', () => {
       it('deve retornar um status 401', async () => {
         const httpResponse = await chai

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import statusCodes from '../statusCodes'
+import statusCodes from '../utils/statusCodes'
 import LoginService from '../services/LoginService'
 
 export default class LoginController {

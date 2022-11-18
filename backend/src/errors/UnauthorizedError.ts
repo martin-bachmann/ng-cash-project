@@ -1,4 +1,4 @@
-import statusCodes from '../statusCodes'
+import statusCodes from '../utils/statusCodes'
 
 export default class UnauthorizedError extends Error {
   public status: number

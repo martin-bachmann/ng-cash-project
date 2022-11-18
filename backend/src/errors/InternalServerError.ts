@@ -1,4 +1,4 @@
-import statusCodes from '../statusCodes'
+import statusCodes from '../utils/statusCodes'
 
 export default class InternalServerError extends Error {
   public status: number

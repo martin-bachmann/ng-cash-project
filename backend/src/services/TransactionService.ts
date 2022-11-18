@@ -6,6 +6,7 @@ import User from '../database/models/UserModel'
 import BadRequestError from '../errors/BadRequestError'
 import InternalServerError from '../errors/InternalServerError'
 import NotFoundError from '../errors/NotFoundError'
+import { DATE_REGEX } from '../utils/dateRegex'
 
 export default class TransactionService {
   performTransaction = async(myUsername: string, myAccountId: number, username: string, value: number): Promise<string> => {
@@ -45,7 +46,63 @@ export default class TransactionService {
   }
 
   getTransactions = async(accountId: number): Promise<Transaction[]> => {
-    const transactionsList = await Transaction.findAll({ where: { [Op.or]: [{ debitedAccountId: accountId }, { creditedAccountId: accountId }] } })
+    const transactionsList = await Transaction.findAll(
+      { where: { [Op.or]: [{ debitedAccountId: accountId }, { creditedAccountId: accountId }] } }
+    )
+
+    return transactionsList
+  }
+
+  getTransactionsWithDate = async(accountId: number, from: string, to: string): Promise<Transaction[]> => {
+    if (!from.match(DATE_REGEX) || !to.match(DATE_REGEX)) {
+      throw new BadRequestError('"from" and "to" queries must match YYYY-MM-DD')
+    }
+
+    const transactionsList = await Transaction.findAll(
+      { where: { 
+        [Op.or]: [{ debitedAccountId: accountId },{ creditedAccountId: accountId }],
+        createdAt: { [Op.gt]: new Date(from), [Op.lt]: new Date(Number(new Date(to)) + 24 * 60 * 60 * 1000) }
+      } }
+    )
+
+    return transactionsList
+  }
+
+  getCashoutTransactions = async(accountId: number): Promise<Transaction[]> => {
+    const transactionsList = await Transaction.findAll({ where: { debitedAccountId: accountId } })
+    
+    return transactionsList
+  }
+
+  getCashoutTransactionsWithDate = async(accountId: number, from: string, to: string): Promise<Transaction[]> => {
+    if (!from.match(DATE_REGEX) || !to.match(DATE_REGEX)) {
+      throw new BadRequestError('"from" and "to" queries must match YYYY-MM-DD')
+    }
+
+    const transactionsList = await Transaction.findAll({ where: { 
+      debitedAccountId: accountId,
+      createdAt: { [Op.gt]: new Date(Number(new Date(from)) - 24 * 60 * 60 * 1000), [Op.lt]: new Date(to) }
+    } })
+
+    return transactionsList
+  }
+
+  getCashinTransactions = async(accountId: number): Promise<Transaction[]> => {
+    const transactionsList = await Transaction.findAll({ where: { creditedAccountId: accountId } })
+    
+    return transactionsList
+  }
+
+  getCashinTransactionsWithDate = async(accountId: number, from: string, to: string): Promise<Transaction[]> => {
+    if (!from.match(DATE_REGEX) || !to.match(DATE_REGEX)) {
+      throw new BadRequestError('"from" and "to" queries must match YYYY-MM-DD')
+    }
+
+    const transactionsList = await Transaction.findAll({ where: { 
+      creditedAccountId: accountId, 
+      createdAt: { [Op.gt]: new Date(Number(new Date(from)) - 24 * 60 * 60 * 1000), [Op.lt]: new Date(to)}
+    } })
+
     return transactionsList
   }
 }
