@@ -46,7 +46,7 @@ describe('02 - Account routes', () => {
       })
       afterEach(() => sinon.restore())
 
-      it('deve retornar um status 201', async () => {
+      it('deve retornar um status 200', async () => {
         const httpResponse = await chai
         .request(app)
         .get('/account')

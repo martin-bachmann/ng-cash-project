@@ -9,3 +9,34 @@ export const transaction = {
   value: 50.00,
   createdAt: Date.now(),
 }
+
+export const transactionsList = [
+  {
+    id: 1,
+    debitedAccountId: 1,
+    creditedAccountId: 2,
+    value: 50.00,
+    createdAt: Date.now(),
+  },
+  {
+    id: 2,
+    debitedAccountId: 1,
+    creditedAccountId: 2,
+    value: 50.00,
+    createdAt: Date.now(),
+  },
+  {
+    id: 3,
+    debitedAccountId: 2,
+    creditedAccountId: 1,
+    value: 50.00,
+    createdAt: Date.now(),
+  },
+  {
+    id: 4,
+    debitedAccountId: 2,
+    creditedAccountId: 1,
+    value: 50.00,
+    createdAt: Date.now(),
+  }
+]
