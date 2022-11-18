@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import database from '../database/models'
 import Account from '../database/models/AccountModel'
 import Transaction from '../database/models/TransactionModel'
@@ -41,5 +42,10 @@ export default class TransactionService {
     await t.commit()
 
     return 'Transaction done'
+  }
+
+  getTransactions = async(accountId: number): Promise<Transaction[]> => {
+    const transactionsList = await Transaction.findAll({ where: { [Op.or]: [{ debitedAccountId: accountId }, { creditedAccountId: accountId }] } })
+    return transactionsList
   }
 }

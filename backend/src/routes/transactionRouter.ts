@@ -9,4 +9,6 @@ const transactionController = new TransactionController()
 
 router.post('/', validateJWT, transactionMiddleware, transactionController.performTransaction)
 
+router.get('/', validateJWT, transactionController.getTransactions)
+
 export default router

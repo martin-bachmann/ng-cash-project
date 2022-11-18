@@ -10,4 +10,10 @@ export default class TransactionController {
     const response = await this.transactionService.performTransaction(myUsername, accountId, username, value)
     return res.status(statusCodes.created).json({ response })
   }
+
+  getTransactions = async (req: Request, res: Response) => {
+    const { accountId } = req.body.user
+    const transactions = await this.transactionService.getTransactions(accountId)
+    return res.status(statusCodes.ok).json(transactions)
+  }
 }
