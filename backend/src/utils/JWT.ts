@@ -5,8 +5,8 @@ import UnauthorizedError from '../errors/UnauthorizedError'
 
 const secret: string = process.env.JWT_SECRET || 'seusecretdetoken'
 
-const generateToken = (id: number, email: string): string => {
-  const payload = { id, email }
+const generateToken = (id: number, username: string, accountId: number): string => {
+  const payload = { id, username, accountId }
   const token = sign(payload, secret, { expiresIn: '24h' })
   return token
 }

@@ -1,12 +1,12 @@
 import { compare, hash } from 'bcryptjs'
 import { generateToken } from '../utils/JWT'
-import UnauthorizedError from '../errors/UnauthorizedError'
-import User from '../database/models/UserModel'
-import UnprocEntityError from '../errors/UnprocEntityError'
-import BadRequestError from '../errors/BadRequestError'
-import Account from '../database/models/AccountModel'
 import database from '../database/models'
+import Account from '../database/models/AccountModel'
+import User from '../database/models/UserModel'
+import BadRequestError from '../errors/BadRequestError'
 import ForbiddenError from '../errors/ForbiddenError'
+import UnauthorizedError from '../errors/UnauthorizedError'
+import UnprocEntityError from '../errors/UnprocEntityError'
 
 export default class LoginService {
   registerUser = async (username: string, password: string): Promise<string> => {
@@ -46,8 +46,8 @@ export default class LoginService {
       throw new UnauthorizedError('Incorrect username or password')
     }
 
-    const { id } = user
-    const token = generateToken(id, username)
+    const { id, accountId } = user
+    const token = generateToken(id, username, accountId)
     return token
   }
 }

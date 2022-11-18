@@ -13,48 +13,48 @@ chai.use(chaiHttp)
 
 const { expect } = chai
 
-describe('GET /account - visualizar o balance atual', () => {
-  describe('quando o token não é informado', () => {
-    afterEach(() => sinon.restore())
+describe('02 - Account routes', () => {
+  describe('GET /account - visualizar o balance atual', () => {
+    describe('quando o token não é informado', () => {
+      it('deve retornar um status 401', async () => {
+        const httpResponse = await chai
+          .request(app)
+          .get('/account')
 
-    it('deve retornar um status 401', async () => {
-      const httpResponse = await chai
-        .request(app)
-        .post('/account')
-
-      expect(httpResponse.status).to.equal(401)
-      expect(httpResponse.body).to.deep.equal({ message: 'Token not found' })
+        expect(httpResponse.body).to.deep.equal({ message: 'Token not found' })
+        expect(httpResponse.status).to.equal(401)
+      })
     })
-  })
-  describe('quando o token não é valido', () => {
-    beforeEach(() => sinon.stub(jwt, 'verify').resolves(null))
-    afterEach(() => sinon.restore())
+    describe('quando o token não é valido', () => {
+      beforeEach(() => sinon.stub(jwt, 'verify').throws())
+      afterEach(() => sinon.restore())
 
-    it('deve retornar um status 401', async () => {
-      const httpResponse = await chai
+      it('deve retornar um status 401', async () => {
+        const httpResponse = await chai
+          .request(app)
+          .get('/account')
+          .set('Authorization', 'token')
+
+        expect(httpResponse.body).to.deep.equal({ message: 'Token must be a valid token' })
+        expect(httpResponse.status).to.equal(401)
+      })
+    })
+    describe('em caso de sucesso', () => {
+      beforeEach(() => {
+        sinon.stub(jwt, 'verify').resolves(user as User)
+        sinon.stub(Model, 'findOne').resolves(account as Account)
+      })
+      afterEach(() => sinon.restore())
+
+      it('deve retornar um status 201', async () => {
+        const httpResponse = await chai
         .request(app)
-        .post('/account')
+        .get('/account')
         .set('Authorization', 'token')
 
-      expect(httpResponse.status).to.equal(401)
-      expect(httpResponse.body).to.deep.equal({ message: 'Token must be a valid token' })
-    })
-  })
-  describe('em caso de sucesso', () => {
-    beforeEach(() => {
-      sinon.stub(jwt, 'verify').resolves(user as User)
-      sinon.stub(Model, 'findOne').resolves(account as Account)
-    })
-    afterEach(() => sinon.restore())
-
-    it('deve retornar um status 201', async () => {
-      const httpResponse = await chai
-      .request(app)
-      .post('/account')
-      .set('Authorization', 'token')
-
-      expect(httpResponse.status).to.equal(200)
-      expect(httpResponse.body).to.deep.equal({ balance: 100.00 })
+        expect(httpResponse.status).to.equal(200)
+        expect(httpResponse.body).to.deep.equal({ balance: 100.00 })
+      })
     })
   })
 })
