@@ -21,8 +21,8 @@ describe('02 - Account routes', () => {
           .request(app)
           .get('/account')
 
-        expect(httpResponse.body).to.deep.equal({ message: 'Token not found' })
-        expect(httpResponse.status).to.equal(401)
+          expect(httpResponse.status).to.equal(401)
+          expect(httpResponse.body).to.deep.equal({ message: 'Token not found' })
       })
     })
     describe('quando o token não é valido', () => {
@@ -35,14 +35,14 @@ describe('02 - Account routes', () => {
           .get('/account')
           .set('Authorization', 'token')
 
-        expect(httpResponse.body).to.deep.equal({ message: 'Token must be a valid token' })
-        expect(httpResponse.status).to.equal(401)
+          expect(httpResponse.status).to.equal(401)
+          expect(httpResponse.body).to.deep.equal({ message: 'Token must be a valid token' })
       })
     })
     describe('em caso de sucesso', () => {
       beforeEach(() => {
         sinon.stub(jwt, 'verify').resolves(user as User)
-        sinon.stub(Model, 'findOne').resolves(account as Account)
+        sinon.stub(Model, 'findByPk').resolves(account as Account)
       })
       afterEach(() => sinon.restore())
 
