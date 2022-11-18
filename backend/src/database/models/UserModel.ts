@@ -42,7 +42,7 @@ User.init(
   }
 )
 
-User.belongsTo(Account, { foreignKey: 'accountId', as: 'accountId'})
-Account.hasOne(User, { foreignKey: 'accountId', as: 'accountId'})
+User.belongsTo(Account, { foreignKey: 'accountId', as: 'accountIdF'})
+Account.hasOne(User, { foreignKey: 'accountId', as: 'accountIdF'})
 
 export default User

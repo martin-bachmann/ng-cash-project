@@ -13,9 +13,9 @@ module.exports = {
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(150),
       },
-      accountId: {
+      account_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

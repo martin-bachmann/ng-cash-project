@@ -1,10 +1,11 @@
 const statusCodes = {
   ok: 200,
-  notFound: 404,
   created: 201,
+  noContent: 204,
   badRequest: 400,
   unauthorized: 401,
-  noContent: 204,
+  forbidden: 403,
+  notFound: 404,
   unprocessableEntity: 422,
   internalServerError: 500,
 }

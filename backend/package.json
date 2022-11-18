@@ -4,9 +4,10 @@
   "description": "",
   "main": "./build/server.js",
   "scripts": {
-    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
-    "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "build": "tsc",
+    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "predev": "npm run build && npm run db:reset",    
+    "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
@@ -44,6 +45,6 @@
     "jsonwebtoken": "8.5.1",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.25.6"
+    "sequelize": "6.3.4"
   }
 }

@@ -9,15 +9,13 @@ class Account extends Model {
 Account.init(
   {
     id: {
-
-
-        type: INTEGER,
+      type: INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
     balance: {
-              allowNull: false,
+      allowNull: false,
       type: DECIMAL(10, 2),
     }, 
   }, {
