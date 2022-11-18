@@ -3,7 +3,8 @@ import chai from 'chai'
 import chaiHttp from 'chai-http'
 import jwt from 'jsonwebtoken'
 import { app } from '../app'
-import { Model, Transaction } from 'sequelize'
+import { Model } from 'sequelize'
+import database from '../database/models'
 import User from '../database/models/UserModel'
 import Account from '../database/models/AccountModel'
 import { user } from './mocks/login.mocks'
@@ -68,7 +69,7 @@ describe('03 - Transaction routes', () => {
         .request(app)
         .post('/transaction')
         .set('Authorization', 'token')
-        .send({ username: 'usuario' })
+        .send({ username: 'usuarioCreditado' })
 
         expect(httpResponse.status).to.equal(400)
         expect(httpResponse.body).to.deep.equal({ 'message': '"value" is required' })
@@ -103,7 +104,7 @@ describe('03 - Transaction routes', () => {
         .request(app)
         .post('/transaction')
         .set('Authorization', 'token')
-        .send({ username: 'usuario', value: 50.00 })
+        .send({ username: 'usuarioCreditado', value: 50.00 })
 
         expect(httpResponse.status).to.equal(404)
         expect(httpResponse.body).to.deep.equal({ 'message': '"username" not found' })
@@ -122,7 +123,7 @@ describe('03 - Transaction routes', () => {
         .request(app)
         .post('/transaction')
         .set('Authorization', 'token')
-        .send({ username: 'usuario', value: 50.00 })
+        .send({ username: 'usuarioCreditado', value: 50.00 })
 
         expect(httpResponse.status).to.equal(400)
         expect(httpResponse.body).to.deep.equal({ 'message': 'Insuficient balance' })
@@ -133,7 +134,8 @@ describe('03 - Transaction routes', () => {
         sinon.stub(jwt, 'verify').resolves(user as User)
         sinon.stub(Model, 'findOne').resolves(creditedUser as User)
         sinon.stub(Model, 'findByPk').resolves(account as Account)
-        sinon.stub(Model, 'update').onFirstCall().resolves()
+        sinon.stub(database, 'transaction').resolves({ commit(): void { } } as any)
+        sinon.stub(Model, 'increment').onFirstCall().resolves()
           .onSecondCall().resolves()
         sinon.stub(Model, 'create').resolves(transaction as any)
       })
@@ -144,7 +146,7 @@ describe('03 - Transaction routes', () => {
         .request(app)
         .post('/transaction')
         .set('Authorization', 'token')
-        .send({ username: 'usuario', value: 50.00 })
+        .send({ username: 'usuarioCreditado', value: 50.00 })
 
         expect(httpResponse.status).to.equal(201)
         expect(httpResponse.body).to.deep.equal({ response: 'Transaction done'})

@@ -4,9 +4,9 @@ import chaiHttp from 'chai-http'
 import bcrypt from 'bcryptjs'
 import { app } from '../app'
 import { Model } from 'sequelize'
+import database from '../database/models'
 import User from '../database/models/UserModel'
 import { user } from './mocks/login.mocks'
-import database from '../database/models'
 
 chai.use(chaiHttp)
 

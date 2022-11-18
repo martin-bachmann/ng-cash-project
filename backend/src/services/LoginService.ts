@@ -3,10 +3,10 @@ import { generateToken } from '../utils/JWT'
 import database from '../database/models'
 import Account from '../database/models/AccountModel'
 import User from '../database/models/UserModel'
-import BadRequestError from '../errors/BadRequestError'
 import ForbiddenError from '../errors/ForbiddenError'
 import UnauthorizedError from '../errors/UnauthorizedError'
 import UnprocEntityError from '../errors/UnprocEntityError'
+import InternalServerError from '../errors/InternalServerError'
 
 export default class LoginService {
   registerUser = async (username: string, password: string): Promise<string> => {
@@ -27,7 +27,7 @@ export default class LoginService {
       await User.create({ username, password: cryptedPassword, accountId: id }, { transaction: t})
     } catch (e) {
       await t.rollback()
-      throw new BadRequestError('database error')
+      throw new InternalServerError('database error')
     }
     await t.commit()
 

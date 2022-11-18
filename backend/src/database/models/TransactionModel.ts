@@ -53,10 +53,10 @@ Transaction.init(
   }
 )
 
-Transaction.belongsTo(Account, { foreignKey: 'debitedAccountId', as: 'debitedAccountId'})
-Transaction.belongsTo(Account, { foreignKey: 'creditedAccountId', as: 'creditedAccountId'})
+Transaction.belongsTo(Account, { foreignKey: 'debitedAccountId', as: 'debitedAccountIdF'})
+Transaction.belongsTo(Account, { foreignKey: 'creditedAccountId', as: 'creditedAccountIdF'})
 
-Account.hasMany(Transaction, { foreignKey: 'debitedAccountId', as: 'debitedAccountId'})
-Account.hasMany(Transaction, { foreignKey: 'creditedAccountId', as: 'creditedAccountId'})
+Account.hasMany(Transaction, { foreignKey: 'debitedAccountId', as: 'debitedAccountIdF'})
+Account.hasMany(Transaction, { foreignKey: 'creditedAccountId', as: 'creditedAccountIdF'})
 
 export default Transaction
