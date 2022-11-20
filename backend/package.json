@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "test:coverage": "nyc npm run test",
     "predev": "npm run build && npm run db:reset",    
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
@@ -30,6 +31,7 @@
     "eslint": "^8.27.0",
     "mocha": "^10.1.0",
     "nodemon": "^2.0.20",
+    "nyc": "15.1.0",
     "sequelize-cli": "^6.5.2",
     "sinon": "^14.0.2",
     "ts-node": "10.7.0",
