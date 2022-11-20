@@ -50,4 +50,12 @@ export default class LoginService {
     const token = generateToken(id, username, accountId)
     return token
   }
+
+  validateLogin = async (username: string): Promise<string> => {
+    const user = await User.findOne({ where: { username } })
+    if (!user) {
+      throw new UnauthorizedError('Token must be a valid token')
+    }
+    return username
+  }
 }

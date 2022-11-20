@@ -7,6 +7,10 @@ const config: Options = {
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASS || '123456',
   database: 'ng_db',
+  dialectOptions: {
+    useUTC: false,
+  },
+  timezone:'-03:00',
   port: Number(process.env.DB_PORT) || 5432,
 }
 

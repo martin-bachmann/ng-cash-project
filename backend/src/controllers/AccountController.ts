@@ -8,6 +8,6 @@ export default class AccountController {
   getBalance = async (req: Request, res: Response) => {
     const { accountId } = req.body.user
     const balance = await this.accountService.getBalance(accountId)
-    return res.status(statusCodes.ok).json({ balance })
+    return res.status(statusCodes.ok).json(balance)
   }
 }

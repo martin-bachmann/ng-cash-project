@@ -17,7 +17,7 @@ function Login() {
       setErrorMessage('');
       localStorage.setItem('token', token);
 
-      history.push('/');
+      history.push('/main');
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }
