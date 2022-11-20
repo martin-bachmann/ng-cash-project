@@ -1,27 +1,55 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserForm from '../components/UserForm';
+import { postData } from '../services/requests';
 
 function Register() {
-  const [registerForm, setRegisterForm] = useState({ username: '', password: '' });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
-  const handleChange = ({ name, value }) => (
-    setRegisterForm({ ...registerForm, [name]: value })
-  );
 
-  const register = () => {
-    // registrar cadastro
-    history.push('/login');
+  const register = async () => {
+    try {
+      await postData('/login/register', { username, password });
+      setErrorMessage('');
+      history.push('/login');
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
+    }
   };
 
   return (
     <div className="login-container">
-      <UserForm
-        buttonText="Cadastrar"
-        handleChange={ handleChange }
-        handleSubmit={ register }
-        value={ registerForm }
-      />
+      <form
+        className="login-form-container"
+        onSubmit={ (event) => {
+          event.preventDefault();
+          register();
+        } }
+      >
+        <label htmlFor="username-input">
+          <input
+            type="text"
+            value={ username }
+            onChange={ ({ target: { value } }) => setUsername(value) }
+            placeholder="Username"
+          />
+        </label>
+        <label htmlFor="password-input">
+          <input
+            type="password"
+            value={ password }
+            onChange={ ({ target: { value } }) => setPassword(value) }
+            placeholder="Senha"
+          />
+        </label>
+        <p>{ errorMessage }</p>
+        <button
+          type="submit"
+        >
+          Cadastrar
+        </button>
+      </form>
     </div>
   );
 }

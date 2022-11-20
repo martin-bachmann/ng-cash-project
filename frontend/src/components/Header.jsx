@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import LoginContext from '../context/LoginContext';
 
 function Header() {
-  const logout = () => true;
+  const history = useHistory();
+  const { loggedIn, login } = useContext(LoginContext);
+
+  const logout = () => {
+    console.log(loggedIn);
+    login();
+    if (!loggedIn) {
+      history.push('/login');
+    }
+  };
   return (
     <header>
       <button type="button" onClick={ logout }>

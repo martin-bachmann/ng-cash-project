@@ -1,35 +1,60 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import UserForm from '../components/UserForm';
-import LoginContext from '../context/LoginContext';
+import { postData, setToken } from '../services/requests';
 import './Login.css';
 
 function Login() {
-  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
-  const { loggedIn, login } = useContext(LoginContext);
 
-  const handleChange = ({ name, value }) => (
-    setLoginForm({ ...loginForm, [name]: value })
-  );
+  const loginFunc = async () => {
+    try {
+      const { token } = await postData('/login', { username, password });
 
-  const loginFunc = () => {
-    // conecta com a rota de login
-    console.log(loggedIn);
-    login();
-    if (loggedIn) {
+      setToken(token);
+      setErrorMessage('');
+      localStorage.setItem('token', token);
+
       history.push('/');
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
     }
   };
 
   return (
     <div className="login-container">
-      <UserForm
-        buttonText="Entrar"
-        handleChange={ handleChange }
-        handleSubmit={ loginFunc }
-        value={ loginForm }
-      />
+      <form
+        className="login-form-container"
+        onSubmit={ (event) => {
+          event.preventDefault();
+          loginFunc();
+        } }
+      >
+        <label htmlFor="username-input">
+          <input
+            type="text"
+            value={ username }
+            onChange={ ({ target: { value } }) => setUsername(value) }
+            placeholder="Username"
+          />
+        </label>
+        <label htmlFor="password-input">
+          <input
+            type="password"
+            value={ password }
+            onChange={ ({ target: { value } }) => setPassword(value) }
+            placeholder="Senha"
+          />
+        </label>
+        <p>{ errorMessage }</p>
+        <button
+          type="submit"
+        >
+          Entrar
+        </button>
+      </form>
       <p>
         Não tem uma conta?
         {' '}
