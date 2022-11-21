@@ -50,13 +50,13 @@ export default class TransactionService {
       where: { [Op.or]: [{ debitedAccountId: accountId }, { creditedAccountId: accountId }] },
       include: [
         {
-          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'debitedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         },
         {
-          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'creditedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         }
       ]
@@ -77,13 +77,13 @@ export default class TransactionService {
       },
       include: [
         {
-          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'debitedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         },
         {
-          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'creditedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         }
       ] 
@@ -97,13 +97,13 @@ export default class TransactionService {
       where: { debitedAccountId: accountId },
       include: [
         {
-          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'debitedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         },
         {
-          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'creditedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         }
       ]
@@ -124,13 +124,13 @@ export default class TransactionService {
       },
       include: [
         {
-          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'debitedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         },
         {
-          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'creditedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         }
       ]
@@ -144,13 +144,13 @@ export default class TransactionService {
       where: { creditedAccountId: accountId },
       include: [
         {
-          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'debitedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         },
         {
-          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'creditedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         }
       ]
@@ -171,13 +171,13 @@ export default class TransactionService {
       },
       include: [
         {
-          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'debitedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         },
         {
-          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
-            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          model: Account, as: 'creditedAccount', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'account', attributes: [ 'username' ] }
           ],
         }
       ]

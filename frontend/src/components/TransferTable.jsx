@@ -21,8 +21,8 @@ function TransferTable({ transactions }) {
       <tbody>
         {transactions.map((t) => (
           <tr key={ t.createdAt }>
-            <td>{t.debitedAccountIdF.accountIdF.username}</td>
-            <td>{t.creditedAccountIdF.accountIdF.username}</td>
+            <td>{t.debitedAccount.account.username}</td>
+            <td>{t.creditedAccount.account.username}</td>
             <td>{`R$ ${t.value}`}</td>
             <td>{transformDate(t.createdAt)}</td>
           </tr>

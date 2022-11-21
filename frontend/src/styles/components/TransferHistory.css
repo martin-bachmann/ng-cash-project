@@ -15,6 +15,19 @@
   margin-bottom: 20px;
 }
 
+.transfer-filters-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.transfer-filters-container p {
+  color: white;
+  font-size: 1.3em;
+}
+
 .transfer-filters {
   align-items: center;
   background-color: white;
