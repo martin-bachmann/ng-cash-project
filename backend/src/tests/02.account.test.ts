@@ -53,7 +53,7 @@ describe('02 - Account routes', () => {
         .set('Authorization', 'token')
 
         expect(httpResponse.status).to.equal(200)
-        expect(httpResponse.body).to.deep.equal({ balance: 100.00 })
+        expect(httpResponse.body).to.deep.equal(100.00)
       })
     })
   })

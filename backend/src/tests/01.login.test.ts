@@ -18,7 +18,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 400', async () => {
         const httpResponse = await chai
           .request(app)
-          .post('/login')
+          .post('/login/register')
           .send({ password: '123456' })
         
         expect(httpResponse.status).to.equal(400)
@@ -29,7 +29,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 400', async () => {
         const httpResponse = await chai
           .request(app)
-          .post('/login')
+          .post('/login/register')
           .send({ username: 'usuario' })
         
         expect(httpResponse.status).to.equal(400)
@@ -40,7 +40,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 422', async () => {
         const httpResponse = await chai
           .request(app)
-          .post('/login')
+          .post('/login/register')
           .send({ username: 'us', password: '123456' })
       
         expect(httpResponse.status).to.equal(422)
@@ -54,7 +54,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 403', async () => {
         const httpResponse = await chai
           .request(app)
-          .post('/login')
+          .post('/login/register')
           .send({ username: 'usuario', password: '123456' })
       
         expect(httpResponse.status).to.equal(403)
@@ -74,7 +74,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 200', async () => {
         const httpResponse = await chai
           .request(app)
-          .post('/login')
+          .post('/login/register')
           .send({ username: 'usuario', password: '123456' })
       
           expect(httpResponse.status).to.equal(201)
@@ -88,7 +88,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 400', async () => {
         const httpResponse = await chai
           .request(app)
-          .get('/login')
+          .post('/login')
           .send({ password: '123456' })
         
         expect(httpResponse.status).to.equal(400)
@@ -99,7 +99,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 400', async () => {
         const httpResponse = await chai
           .request(app)
-          .get('/login')
+          .post('/login')
           .send({ username: 'usuario' })
         
         expect(httpResponse.status).to.equal(400)
@@ -113,7 +113,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 401', async () => {
         const httpResponse = await chai
           .request(app)
-          .get('/login')
+          .post('/login')
           .send({ username: 'usuario', password: '123456' })
         
         expect(httpResponse.status).to.equal(401)
@@ -130,7 +130,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 401', async () => {
         const httpResponse = await chai
           .request(app)
-          .get('/login')
+          .post('/login')
           .send({ username: 'usuario', password: '123456' })
         
         expect(httpResponse.status).to.equal(401)
@@ -147,7 +147,7 @@ describe('01 - Login routes', () => {
       it('deve retornar um status 200', async () => {
         const httpResponse = await chai
           .request(app)
-          .get('/login')
+          .post('/login')
           .send({ username: 'usuario', password: '123456' })
         
         expect(httpResponse.status).to.equal(200)
