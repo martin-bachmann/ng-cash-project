@@ -46,9 +46,21 @@ export default class TransactionService {
   }
 
   getTransactions = async(accountId: number): Promise<Transaction[]> => {
-    const transactionsList = await Transaction.findAll(
-      { where: { [Op.or]: [{ debitedAccountId: accountId }, { creditedAccountId: accountId }] } }
-    )
+    const transactionsList = await Transaction.findAll({
+      where: { [Op.or]: [{ debitedAccountId: accountId }, { creditedAccountId: accountId }] },
+      include: [
+        {
+          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        },
+        {
+          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        }
+      ]
+    })
 
     return transactionsList
   }

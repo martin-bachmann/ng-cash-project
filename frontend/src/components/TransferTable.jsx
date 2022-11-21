@@ -8,6 +8,8 @@ function TransferTable({ transactions }) {
     return correctDate.toLocaleString('en-GB');
   };
 
+  console.log(transactions);
+
   return (
     <table>
       <thead>
@@ -21,8 +23,8 @@ function TransferTable({ transactions }) {
       <tbody>
         {transactions.map((t) => (
           <tr key={ t.createdAt }>
-            <td>{t.debitedAccountId}</td>
-            <td>{t.creditedAccountId}</td>
+            <td>{t.debitedAccountIdF.accountIdF.username}</td>
+            <td>{t.creditedAccountIdF.accountIdF.username}</td>
             <td>{`R$ ${t.value}`}</td>
             <td>{transformDate(t.createdAt)}</td>
           </tr>
