@@ -12,7 +12,9 @@ function TransferTableFilters({ queryTransferHistory }) {
     if (from || to) {
       query += 'search?';
       query += from ? `from=${from.toISOString().split('T')[0]}` : '';
+      query += (from && to) ? '&' : '';
       query += to ? `to=${to.toISOString().split('T')[0]}` : '';
+      console.log(query);
     }
     await queryTransferHistory(query);
   };

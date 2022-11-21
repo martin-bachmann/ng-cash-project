@@ -24,7 +24,7 @@ export default class TransactionService {
     }
 
     const myAccount = await Account.findByPk(myAccountId)
-    if (myAccount && myAccount.balance < value) {
+    if (myAccount && Number(myAccount.balance) < value) {
       throw new BadRequestError('Insuficient balance')
     }
 
@@ -70,18 +70,44 @@ export default class TransactionService {
       throw new BadRequestError('"from" and "to" queries must match YYYY-MM-DD')
     }
 
-    const transactionsList = await Transaction.findAll(
-      { where: { 
+    const transactionsList = await Transaction.findAll({ 
+      where: { 
         [Op.or]: [{ debitedAccountId: accountId },{ creditedAccountId: accountId }],
         createdAt: { [Op.gt]: new Date(from), [Op.lt]: new Date(Number(new Date(to)) + 24 * 60 * 60 * 1000) }
-      } }
-    )
+      },
+      include: [
+        {
+          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        },
+        {
+          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        }
+      ] 
+    })
 
     return transactionsList
   }
 
   getCashoutTransactions = async(accountId: number): Promise<Transaction[]> => {
-    const transactionsList = await Transaction.findAll({ where: { debitedAccountId: accountId } })
+    const transactionsList = await Transaction.findAll({
+      where: { debitedAccountId: accountId },
+      include: [
+        {
+          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        },
+        {
+          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        }
+      ]
+    })
     
     return transactionsList
   }
@@ -91,16 +117,44 @@ export default class TransactionService {
       throw new BadRequestError('"from" and "to" queries must match YYYY-MM-DD')
     }
 
-    const transactionsList = await Transaction.findAll({ where: { 
-      debitedAccountId: accountId,
-      createdAt: { [Op.gt]: new Date(Number(new Date(from)) - 24 * 60 * 60 * 1000), [Op.lt]: new Date(to) }
-    } })
+    const transactionsList = await Transaction.findAll({ 
+      where: { 
+        debitedAccountId: accountId,
+        createdAt: { [Op.gt]: new Date(Number(new Date(from)) - 24 * 60 * 60 * 1000), [Op.lt]: new Date(to) }
+      },
+      include: [
+        {
+          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        },
+        {
+          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        }
+      ]
+    })
 
     return transactionsList
   }
 
   getCashinTransactions = async(accountId: number): Promise<Transaction[]> => {
-    const transactionsList = await Transaction.findAll({ where: { creditedAccountId: accountId } })
+    const transactionsList = await Transaction.findAll({ 
+      where: { creditedAccountId: accountId },
+      include: [
+        {
+          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        },
+        {
+          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        }
+      ]
+    })
     
     return transactionsList
   }
@@ -110,10 +164,24 @@ export default class TransactionService {
       throw new BadRequestError('"from" and "to" queries must match YYYY-MM-DD')
     }
 
-    const transactionsList = await Transaction.findAll({ where: { 
-      creditedAccountId: accountId, 
-      createdAt: { [Op.gt]: new Date(Number(new Date(from)) - 24 * 60 * 60 * 1000), [Op.lt]: new Date(to)}
-    } })
+    const transactionsList = await Transaction.findAll({ 
+      where: { 
+        creditedAccountId: accountId, 
+        createdAt: { [Op.gt]: new Date(Number(new Date(from)) - 24 * 60 * 60 * 1000), [Op.lt]: new Date(to)}
+      },
+      include: [
+        {
+          model: Account, as: 'debitedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        },
+        {
+          model: Account, as: 'creditedAccountIdF', attributes: { exclude: ['balance'] }, include: [
+            { model: User, as: 'accountIdF', attributes: [ 'username' ] }
+          ],
+        }
+      ]
+    })
 
     return transactionsList
   }

@@ -8,8 +8,6 @@ function TransferTable({ transactions }) {
     return correctDate.toLocaleString('en-GB');
   };
 
-  console.log(transactions);
-
   return (
     <table>
       <thead>

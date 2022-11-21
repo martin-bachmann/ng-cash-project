@@ -6,7 +6,7 @@ const errorMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
     return res.status(err.status).json({ message: err.message })
   }
 
-  return res.status(statusCodes.internalServerError).json({ message: err.message })
+  return res.status(statusCodes.internalServerError).json({ message: 'Internal server error' })
 }
 
 export default errorMiddleware
