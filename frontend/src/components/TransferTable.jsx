@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TransferTable({ transactions }) {
+  const transformDate = (date) => {
+    const hourCorrection = 216000;
+    const correctDate = new Date(Date.parse(date) - hourCorrection);
+    return correctDate.toLocaleString('en-GB');
+  };
+
   return (
     <table>
       <thead>
@@ -17,8 +23,8 @@ function TransferTable({ transactions }) {
           <tr key={ t.createdAt }>
             <td>{t.debitedAccountId}</td>
             <td>{t.creditedAccountId}</td>
-            <td>{t.value}</td>
-            <td>{t.createdAt}</td>
+            <td>{`R$ ${t.value}`}</td>
+            <td>{transformDate(t.createdAt)}</td>
           </tr>
         ))}
       </tbody>
