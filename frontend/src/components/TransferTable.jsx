@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function TransferTable({ transactions }) {
   return (
-    <table className="table-container">
+    <table>
       <thead>
         <tr>
           <th>Conta debitada</th>

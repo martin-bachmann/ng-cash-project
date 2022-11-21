@@ -1,0 +1,68 @@
+.transfer-history-container {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.904);
+  border-radius: 10px;
+  box-shadow: 12px 12px 0 0 black;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 60%;
+}
+
+.transfer-history-container h1 {
+  color: white;
+  font-size: 1.9em;
+  margin-bottom: 20px;
+}
+
+.transfer-filters {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  padding: 10px;
+  width: 95%;
+}
+
+.transfer-filters label {
+  display: flex;
+  gap: 5px;
+}
+
+.transfer-filters-button {
+  background-color: black;
+  border-radius: 10px;
+  border-style: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 8px;
+}
+
+table {
+  border: transparent;
+  border-spacing: 0;
+  color: white;
+  margin: 0.7vw;
+  width: 98%;
+}
+
+th {
+  background-color: rgba(0, 0, 0, 0.959);
+  border: transparent;
+  display: table-cell;
+  font-size: 0.8em;
+  padding: 16px;
+}
+
+td {
+  border: transparent;
+  border-top: 1px solid rgb(81, 81, 81);
+  display: table-cell;
+  font-size: 0.8em;
+  padding: 16px;
+  text-align: center;
+}

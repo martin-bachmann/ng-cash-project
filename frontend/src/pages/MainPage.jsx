@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import TransferForm from '../components/TransferForm';
 import TransferHistory from '../components/TransferHistory';
 import { getData, setToken } from '../services/requests';
+import '../styles/pages/MainPage.css';
 
 function MainPage() {
   const [username, setUsername] = useState('');
@@ -41,18 +42,22 @@ function MainPage() {
     <div>
       {
         loading ? <p>Loading</p> : (
-          <div>
-            <header>
+          <div className="main-background">
+            <header className="main-header">
               <button type="button" onClick={ logout }>
                 Logout
               </button>
-              <div>
-                <p className="info-text">
-                  Saldo atual: R$
-                  <span>{ balance }</span>
-                </p>
+              <div className="main-header-nav">
+                <div className="balance">
+                  <p>Saldo atual:</p>
+                  <p>{ `R$ ${balance}` }</p>
+                </div>
                 <h1>{ username }</h1>
-                <h2>LOGO</h2>
+                <img
+                  src="logo-ngcash-branco.88c5860.svg"
+                  alt="NG Cash logo"
+                  className="logo"
+                />
               </div>
             </header>
             <main>

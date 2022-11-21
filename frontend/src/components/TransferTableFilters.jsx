@@ -19,6 +19,7 @@ function TransferTableFilters({ queryTransferHistory }) {
 
   return (
     <form
+      className="transfer-filters"
       onSubmit={ (event) => {
         event.preventDefault();
         filter();
@@ -59,6 +60,7 @@ function TransferTableFilters({ queryTransferHistory }) {
         Cash-out
       </label>
       <button
+        className="transfer-filters-button"
         type="submit"
       >
         Filtrar

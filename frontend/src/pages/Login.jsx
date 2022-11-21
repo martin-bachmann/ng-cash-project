@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { postData, setToken } from '../services/requests';
-import './Login.css';
+import '../styles/pages/Login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -24,44 +24,47 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form
-        className="login-form-container"
-        onSubmit={ (event) => {
-          event.preventDefault();
-          loginFunc();
-        } }
-      >
-        <label htmlFor="username-input">
-          <input
-            type="text"
-            value={ username }
-            onChange={ ({ target: { value } }) => setUsername(value) }
-            placeholder="Username"
-          />
-        </label>
-        <label htmlFor="password-input">
-          <input
-            type="password"
-            value={ password }
-            onChange={ ({ target: { value } }) => setPassword(value) }
-            placeholder="Senha"
-          />
-        </label>
-        <p>{ errorMessage }</p>
-        <button
-          type="submit"
+    <div className="login-background">
+      <div className="login-container">
+        <h1>Fazer login</h1>
+        <form
+          className="login-form-container"
+          onSubmit={ (event) => {
+            event.preventDefault();
+            loginFunc();
+          } }
         >
-          Entrar
-        </button>
-      </form>
-      <p>
-        Não tem uma conta?
-        {' '}
-        <Link to="/register">
-          <span>Cadastre-se!</span>
-        </Link>
-      </p>
+          <label htmlFor="username-input">
+            <input
+              type="text"
+              value={ username }
+              onChange={ ({ target: { value } }) => setUsername(value) }
+              placeholder="Username"
+            />
+          </label>
+          <label htmlFor="password-input">
+            <input
+              type="password"
+              value={ password }
+              onChange={ ({ target: { value } }) => setPassword(value) }
+              placeholder="Senha"
+            />
+          </label>
+          <p>{ errorMessage }</p>
+          <button
+            type="submit"
+          >
+            Entrar
+          </button>
+        </form>
+        <p>
+          Não tem uma conta?
+          {' '}
+          <Link to="/register">
+            <span>Cadastre-se!</span>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

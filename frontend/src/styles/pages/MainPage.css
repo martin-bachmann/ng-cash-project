@@ -1,0 +1,54 @@
+.background {
+  height: 100vh;
+  width: 100vw;
+}
+
+.main-header {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-header button {
+  align-self: end;
+  background-color: black;
+  border: 0;
+  color: white;
+  font-size: 1.1em;
+  padding: 15px 25px;
+}
+
+.main-header-nav {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 30px;
+}
+
+.main-header-nav h1 {
+  font-size: 3.5em;
+}
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.balance p {
+  font-size: 1.6em;
+}
+
+.logo {
+  width: 12%;
+}
+
+main {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2%;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getData } from '../services/requests';
 import TransferTable from './TransferTable';
 import TransferTableFilters from './TransferTableFilters';
+import '../styles/components/TransferHistory.css';
 
 function TransferHistory() {
   const [transactions, setTransactions] = useState([]);
@@ -22,8 +23,8 @@ function TransferHistory() {
   }, []);
 
   return (
-    <div>
-      <h2>Histórico de transferências</h2>
+    <div className="transfer-history-container">
+      <h1>Histórico de transferências</h1>
       <TransferTableFilters queryTransferHistory={ queryTransferHistory } />
       <TransferTable transactions={ transactions } />
     </div>

@@ -1,0 +1,30 @@
+.background {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.not-found-container {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.863);
+  border-radius: 10px;
+  box-shadow: 7px 7px 10px black;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  padding: 50px;
+}
+
+.not-found-container h1 {
+  color: white;
+  font-size: 2.2em;
+}
+
+.not-found-container a {
+  color: rgb(106, 228, 218);
+  font-size: 1.5em;
+}

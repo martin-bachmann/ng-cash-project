@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { postData } from '../services/requests';
+import '../styles/components/TransferForm.css';
 
 function TransferForm({ setLoading }) {
   const [username, setUsername] = useState('');
@@ -22,11 +23,13 @@ function TransferForm({ setLoading }) {
 
   return (
     <form
+      className="transfer-form-container"
       onSubmit={ (event) => {
         event.preventDefault();
         performTransaction();
       } }
     >
+      <h1>Transferência</h1>
       <label htmlFor="username-input">
         <input
           type="text"
